@@ -6,6 +6,6 @@ export default () => {
     title: 'Simple User CRUD API',
     description:
       'A nodejs application to create, get, update and delete users. Written in typescript and express',
-    version: '1.0.0',
+    version: '1.0.1',
   };
 };
