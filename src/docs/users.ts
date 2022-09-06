@@ -25,6 +25,19 @@ const get = () => {
   };
 };
 
+const getAll = () => {
+  return {
+    summary: 'Gets all users',
+    description: 'Gets all users',
+    tags,
+    responses: {
+      200: {
+        description: 'Returns all users',
+      },
+    },
+  };
+};
+
 const post = () => {
   return {
     summary: 'Creates a new user',
@@ -41,9 +54,9 @@ const post = () => {
                 type: 'string',
                 example: 'Leanne Graham',
               },
-              dob: {
-                type: 'string',
-                example: '11/11/1991',
+              age: {
+                type: 'number',
+                example: 25,
               },
               address: {
                 type: 'string',
@@ -90,9 +103,9 @@ const patch = () => {
                 type: 'string',
                 example: 'Leanne Graham',
               },
-              dob: {
-                type: 'string',
-                example: '11/11/1991',
+              age: {
+                type: 'number',
+                example: 25,
               },
               address: {
                 type: 'string',
@@ -138,6 +151,7 @@ const del = () => {
 
 const Users = {
   get,
+  getAll,
   post,
   patch,
   del,

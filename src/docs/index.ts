@@ -13,6 +13,7 @@ export default () => {
     paths: {
       '/users': {
         post: users.post(),
+        get: users.getAll(),
       },
       '/users/{userId}': {
         get: users.get(),
