@@ -2,11 +2,11 @@ import { logger } from '../loggers/logger';
 import { UserUpdateOptions } from '../models/user';
 import UserRepo from '../repository/userRepo';
 
-const createUser = async (name: string, dob: string, address: string, description: string) => {
+const createUser = async (name: string, age: string, address: string, description: string) => {
   logger.info(`Creating user with name: ${name}`);
   const newUser = await UserRepo.createUser({
     name,
-    dob,
+    Number(age),
     address,
     description,
     createdAt: new Date(),
