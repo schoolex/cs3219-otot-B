@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import UserService from '../../services/userService';
 import wrap from 'express-async-handler';
+import router from '..';
 
 const route = Router();
 
@@ -10,9 +11,17 @@ export default (app: Router) => {
   route.post(
     '/',
     wrap(async (req: Request, res: Response) => {
-      const { name, dob, address, description } = req.body;
-      const newUser = await UserService.createUser(name, dob, address, description);
+      const { name, age, address, description } = req.body;
+      const newUser = await UserService.createUser(name, age, address, description);
       res.json(newUser).status(200);
+    }),
+  );
+
+  route.get(
+    '/',
+    wrap(async (req: Request, res: Response) => {
+      const users = await UserService.getAllUsers();
+      res.json(users).status(200);
     }),
   );
 

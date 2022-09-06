@@ -35,6 +35,15 @@ const getUser = async (userId: string) => {
   return user;
 };
 
+const getAllUsers = async () => {
+  logger.info('Getting all users');
+  const users = await UserRepo.getAllUsers();
+  if (!users) {
+    throw new Error('Failed to get all users');
+  }
+  return users;
+};
+
 const deleteUser = async (userId: string) => {
   logger.info(`Deleting user with id: ${userId}`);
   const deletedUser = await UserRepo.deleteUser(userId);
@@ -47,6 +56,7 @@ const deleteUser = async (userId: string) => {
 const UserService = {
   createUser,
   getUser,
+  getAllUsers,
   updateUser,
   deleteUser,
 };

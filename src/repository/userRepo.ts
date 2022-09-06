@@ -19,6 +19,11 @@ const getUser = async (userId: string) => {
   return user;
 };
 
+const getAllUsers = async () => {
+  const users = await UserModel.find().select('-__v').lean();
+  return users;
+};
+
 const deleteUser = async (userId: string) => {
   const deletedUser = await UserModel.findByIdAndDelete(userId).select('-__v').lean();
   return deletedUser;
@@ -28,6 +33,7 @@ const UserRepo = {
   createUser,
   updateUser,
   getUser,
+  getAllUsers,
   deleteUser,
 };
 
