@@ -6,7 +6,7 @@ const createUser = async (name: string, age: string, address: string, descriptio
   logger.info(`Creating user with name: ${name}`);
   const newUser = await UserRepo.createUser({
     name,
-    Number(age),
+    age: parseInt(age),
     address,
     description,
     createdAt: new Date(),
