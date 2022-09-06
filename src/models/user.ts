@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 export interface User {
   _id?: string;
   name: string;
-  dob: string;
+  age: number;
   address: string;
   description: string;
   createdAt: Date;
@@ -11,14 +11,14 @@ export interface User {
 
 export interface UserUpdateOptions {
   name?: string;
-  dob?: string;
+  age?: number;
   address?: string;
   description?: string;
 }
 
 const userSchema = new mongoose.Schema({
   name: String,
-  dob: String,
+  age: Number,
   address: String,
   description: String,
   createdAt: Date,
