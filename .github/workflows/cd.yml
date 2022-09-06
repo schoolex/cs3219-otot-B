@@ -23,6 +23,11 @@ jobs:
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+          
+      - name: Prepare environment variables
+        run: yarn app-engine:replace-env-vars
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
 
       - name: Deploy to App Engine
         id: deploy
