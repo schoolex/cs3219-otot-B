@@ -18,17 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: golang-enthusiast/app-yaml-env-compiler@v1.0
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
       - name: auth
         id: auth
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
           
-      - name: Prepare environment variables
-        run: yarn app-engine:replace-env-vars
-        env:
-          DB_URL: ${{ secrets.DB_URL }}
-
       - name: Deploy to App Engine
         id: deploy
         uses: google-github-actions/deploy-appengine@v0
