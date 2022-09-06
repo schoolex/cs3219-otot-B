@@ -13,4 +13,7 @@
 
 # [START gae_quickstart_yaml]
 runtime: nodejs14
+env_variables:
+  # $ variables are expected to be replaced by environment variables
+  DB_URL: $DB_URL
 # [END gae_quickstart_yaml]
