@@ -4,6 +4,7 @@ import * as express from 'express';
 import helmet from 'helmet';
 import routes from '../routes';
 import { logger, httpLogger } from '../loggers/logger';
+import { Exception } from '../exceptions';
 
 /**
  * Initialise the express application
@@ -19,14 +20,13 @@ export default (app: express.Application) => {
 
   // catch 404 and forward to error handler
   app.use((req, res, next) => {
-    const error: Error = new Error('Not Found');
-    error['status'] = 404;
+    const error: Exception = new Exception('Not Found', 404);
     next(error);
   });
 
   // Default error handler
   app.use((err, req, res, next) => {
     logger.error(err.stack);
-    res.status(500).send({ error: err.message });
+    res.status(err.status).json({ message: err.message });
   });
 };

@@ -1,7 +1,6 @@
 import { Request, Response, Router } from 'express';
 import UserService from '../../services/userService';
 import wrap from 'express-async-handler';
-import router from '..';
 
 const route = Router();
 
@@ -27,7 +26,7 @@ export default (app: Router) => {
 
   route.get(
     '/:userId',
-    wrap(async (req: Request, res: Response) => {
+    wrap(async (req: Request, res: Response, next) => {
       const { userId } = req.params;
       const users = await UserService.getUser(userId);
       res.json(users).status(200);
