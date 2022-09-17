@@ -13,7 +13,30 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"Leanne Graham\",\n  \"age\": 25,\n  \"address\": \"711-721 Debs Place\",\n  \"description\": \"I am a user\"\n}",
+					"raw": "{\n  \"name\": \"Michael Tan\",\n  \"age\": 25,\n  \"address\": \"711-721 Debs Place\",\n  \"description\": \"I am a user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}",
+					"host": [
+						"{{BASE_URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User(No Name) - 400",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"age\": 25,\n  \"address\": \"711-721 Debs Place\",\n  \"description\": \"I am a user\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -61,7 +84,67 @@
 			"response": []
 		},
 		{
+			"name": "Get User(Invalid mongoId) - 400",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/631774a5a011152ada6d2a",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"631774a5a011152ada6d2a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"John doe\",\n  \"age\": 46\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/63229182f28d4c39f4c26e07",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"63229182f28d4c39f4c26e07"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/6325c84f9494fc50cd1e0c4c",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"6325c84f9494fc50cd1e0c4c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User(invalid user) - 404",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -78,30 +161,62 @@
 			"response": []
 		},
 		{
-			"name": "Update User",
+			"name": "Serverless Function",
 			"request": {
-				"method": "PATCH",
+				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"name\": \"John doe\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{BASE_URL}}/632292e41af80600250af7b",
+					"raw": "https://bus-arrivals-5x2qev4kja-as.a.run.app/busarrivals?busStopCode=12061&serviceNo=61",
+					"protocol": "https",
 					"host": [
-						"{{BASE_URL}}"
+						"bus-arrivals-5x2qev4kja-as",
+						"a",
+						"run",
+						"app"
 					],
 					"path": [
-						"632292e41af80600250af7b"
+						"busarrivals"
+					],
+					"query": [
+						{
+							"key": "busStopCode",
+							"value": "12061"
+						},
+						{
+							"key": "serviceNo",
+							"value": "61"
+						}
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://cs3219-361208.as.r.appspot.com/api/users",
+			"type": "string"
 		}
 	]
 }
