@@ -2,10 +2,13 @@ import userService from '../src/services/userService';
 
 const USER_JOHN = {
   name: 'John',
-  dob: '01/01/1990',
+  age: '21',
   address: '123 Main St',
   description: 'i am a coder',
 };
+
+const USER_ID1 = '63229182f28d4c39f4c26e07'
+const USER_ID2 = '6325c84f9494fc50cd1e0c4c'
 
 // mock logger with jest
 jest.mock('../src/loggers/logger');
@@ -14,19 +17,19 @@ jest.mock('../src/loggers/logger');
 jest.mock('../src/repository/userRepo', () => {
   const mockCreateUser = () => {
     return Promise.resolve({
-      _id: '1',
+      _id: USER_ID1,
       name: USER_JOHN.name,
-      dob: USER_JOHN.dob,
+      age: USER_JOHN.age,
       address: USER_JOHN.address,
       description: USER_JOHN.description,
     });
   };
   const mockUpdateUser = (id: string) => {
-    if (id === '1') {
+    if (id === USER_ID1) {
       return Promise.resolve({
-        _id: '1',
+        _id: USER_ID1,
         name: USER_JOHN.name,
-        dob: USER_JOHN.dob,
+        age: USER_JOHN.age,
         address: '456 Main St',
         description: USER_JOHN.description,
       });
@@ -35,11 +38,11 @@ jest.mock('../src/repository/userRepo', () => {
     }
   };
   const mockGetOrDeleteUser = (id: string) => {
-    if (id === '1') {
+    if (id === USER_ID1) {
       return Promise.resolve({
-        _id: '1',
+        _id: USER_ID1,
         name: USER_JOHN.name,
-        dob: USER_JOHN.dob,
+        age: USER_JOHN.age,
         address: USER_JOHN.address,
         description: USER_JOHN.description,
       });
@@ -59,50 +62,50 @@ describe('Simple expression tests', () => {
   it('adds user', async () => {
     const user = await userService.createUser(
       USER_JOHN.name,
-      USER_JOHN.dob,
+      USER_JOHN.age,
       USER_JOHN.address,
       USER_JOHN.description,
     );
     expect(user.name).toBe(USER_JOHN.name);
-    expect(user.dob).toBe(USER_JOHN.dob);
+    expect(user.age).toBe(USER_JOHN.age);
     expect(user.address).toBe(USER_JOHN.address);
     expect(user.description).toBe(USER_JOHN.description);
   });
 
   it('updates user', async () => {
-    const user = await userService.updateUser('1', {
+    const user = await userService.updateUser(USER_ID1, {
       address: '456 Main St',
     });
     expect(user?.address).toBe('456 Main St');
   });
 
   it('gets user', async () => {
-    const user = await userService.getUser('1');
+    const user = await userService.getUser(USER_ID1);
     expect(user?.name).toBe(USER_JOHN.name);
-    expect(user?.dob).toBe(USER_JOHN.dob);
+    expect(user?.age).toBe(USER_JOHN.age);
     expect(user?.address).toBe(USER_JOHN.address);
     expect(user?.description).toBe(USER_JOHN.description);
   });
 
   it('deletes user', async () => {
-    const user = await userService.deleteUser('1');
+    const user = await userService.deleteUser(USER_ID1);
     expect(user?.name).toBe(USER_JOHN.name);
-    expect(user?.dob).toBe(USER_JOHN.dob);
+    expect(user?.age).toBe(USER_JOHN.age);
     expect(user?.address).toBe(USER_JOHN.address);
     expect(user?.description).toBe(USER_JOHN.description);
   });
 
   it('gets invalid user', async () => {
-    expect(userService.getUser('2')).rejects.toThrowError();
+    expect(userService.getUser(USER_ID2)).rejects.toThrowError();
   });
 
   it('deletes invalid user', async () => {
-    expect(userService.deleteUser('2')).rejects.toThrowError();
+    expect(userService.deleteUser(USER_ID2)).rejects.toThrowError();
   });
 
   it('updates invalid user', async () => {
     expect(
-      userService.updateUser('2', {
+      userService.updateUser(USER_ID2, {
         address: '456 Main St',
       }),
     ).rejects.toThrowError();
