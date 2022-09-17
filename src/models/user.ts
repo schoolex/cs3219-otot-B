@@ -17,7 +17,7 @@ export interface UserUpdateOptions {
 }
 
 const userSchema = new mongoose.Schema({
-  name: String,
+  name: {type: String, required: true},
   age: Number,
   address: String,
   description: String,

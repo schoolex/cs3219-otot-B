@@ -6,17 +6,21 @@ import { Exception } from '../exceptions';
 
 const createUser = async (name: string, age: string, address: string, description: string) => {
   logger.info(`Creating user with name: ${name}`);
-  const newUser = await UserRepo.createUser({
-    name,
-    age: parseInt(age),
-    address,
-    description,
-    createdAt: new Date(),
-  });
-  if (!newUser) {
-    throw new Exception(`Failed to create user with name: ${name}`, 400);
+  try {
+    const user = await UserRepo.createUser({
+      name,
+      age: parseInt(age),
+      address,
+      description,
+      createdAt: new Date(),
+    });
+    if (!user) {
+      throw new Exception(`Failed to create user with name: ${name}`, 400);
+    }
+    return user;
+  } catch (error) {
+    throw new Exception(`Invalid parameters`, 400);
   }
-  return newUser;
 };
 
 const updateUser = async (userId: string, updatedUserFields: UserUpdateOptions) => {
