@@ -33,7 +33,7 @@ export default (app: Router) => {
     }),
   );
 
-  route.patch(
+  route.put(
     '/:userId',
     wrap(async (req: Request, res: Response) => {
       const { userId } = req.params;

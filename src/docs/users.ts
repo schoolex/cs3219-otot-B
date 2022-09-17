@@ -79,7 +79,7 @@ const post = () => {
   };
 };
 
-const patch = () => {
+const put = () => {
   return {
     summary: 'Updates a user by id',
     description: 'Updates a user by id',
@@ -153,7 +153,7 @@ const Users = {
   get,
   getAll,
   post,
-  patch,
+  put,
   del,
 };
 

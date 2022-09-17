@@ -17,7 +17,7 @@ export default () => {
       },
       '/users/{userId}': {
         get: users.get(),
-        patch: users.patch(),
+        put: users.put(),
         delete: users.del(),
       },
     },
